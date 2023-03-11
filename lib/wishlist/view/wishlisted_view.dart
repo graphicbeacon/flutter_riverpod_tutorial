@@ -2,22 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_example/wishlist/wishlist.dart';
 
-final wishlistedGamesProvider = Provider<List<BoardGame>>((ref) {
-  final state = ref.watch(wishlistAsyncNotifierProvider).value;
-
-  if (state == null) {
-    return [];
-  }
-
-  return state.wishlist
-      .map<BoardGame>(
-        (id) => state.games.singleWhere(
-          (game) => game.id == id,
-        ),
-      )
-      .toList();
-});
-
 class WishlistedView extends ConsumerWidget {
   const WishlistedView({super.key});
 

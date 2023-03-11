@@ -1,12 +1,27 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:riverpod_example/wishlist/wishlist.dart';
 
-final wishlistAsyncNotifierProvider =
-    AsyncNotifierProvider<WishlistAsyncNotifier, WishlistState>(
-  () => WishlistAsyncNotifier(),
-);
+part 'async_notifier.g.dart';
 
-class WishlistAsyncNotifier extends AsyncNotifier<WishlistState> {
+@riverpod
+List<BoardGame> wishlistedGames(WishlistedGamesRef ref) {
+  final state = ref.watch(wishlistAsyncNotifierProvider).value;
+
+  if (state == null) {
+    return [];
+  }
+
+  return state.wishlist
+      .map<BoardGame>(
+        (id) => state.games.singleWhere(
+          (game) => game.id == id,
+        ),
+      )
+      .toList();
+}
+
+@riverpod
+class WishlistAsyncNotifier extends _$WishlistAsyncNotifier {
   WishlistRepository get _api => ref.read(repositoryProvider('8l3xEV0LlB'));
 
   @override
