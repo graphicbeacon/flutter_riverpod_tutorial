@@ -1,0 +1,9 @@
+export 'api/wishlist_repository.dart';
+export 'models/board_game.dart';
+export 'providers/async_notifier.dart';
+export 'providers/change_notifier.dart';
+export 'providers/future.dart';
+export 'providers/notifier.dart';
+export 'providers/state_notifier.dart';
+export 'view/wishlist_app.dart';
+export 'view/wishlisted_view.dart';
